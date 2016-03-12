@@ -1,0 +1,6 @@
+services:
+    avegao.chartjs.twig_extension:
+        class: Avegao\ChartjsBundle\Twig\ChartJSTwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,17 @@
+{
+    "name": "avegao/chartjs-bundle",
+    "license": "GPL-3.0",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Álvaro de la Vega Olmedilla",
+            "email": "alvarodlvo@gmail.com",
+            "homepage": "http://avegao.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "symfony/symfony": "^2.7|^3.0"
+    }
+}
