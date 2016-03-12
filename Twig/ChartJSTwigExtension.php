@@ -18,11 +18,11 @@ class ChartJSTwigExtension extends \Twig_Extension
     /**
      * @inheritDoc
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return [
-            new \Twig_SimpleFilter('chartjs_render_html', [$this, 'renderHTML']),
-            new \Twig_SimpleFilter('chartjs_render_js',   [$this, 'renderJS']),
+            new \Twig_SimpleFunction('chartjs_render_html', [$this, 'renderHTML'], ['is_safe' => ['html'], 'needs_environment' => false]),
+            new \Twig_SimpleFunction('chartjs_render_js', [$this, 'renderJS'], ['is_safe' => ['html'], 'needs_environment' => false]),
         ];
     }
 
@@ -45,6 +45,7 @@ class ChartJSTwigExtension extends \Twig_Extension
     public function renderJS(ChartInterface $chart)
     {
         $js  = '$(document).ready(function(){';
+        $js .= 'Chart.defaults.global.responsive = true;';
         $js .= 'var ctx'.$chart->getId().' = document.getElementById(\''.$chart->getId().'\').getContext(\'2d\');';
 
         $chartClass = get_class($chart);
