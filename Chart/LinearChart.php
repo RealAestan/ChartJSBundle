@@ -52,6 +52,15 @@ class LinearChart implements ChartInterface
     /**
      * @inheritDoc
      */
+    public function getType()
+    {
+        return 'line';
+    }
+
+
+    /**
+     * @inheritDoc
+     */
     public function getLabels()
     {
         return $this->labels;

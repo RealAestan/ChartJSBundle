@@ -18,6 +18,11 @@ interface ChartInterface
     public function setId($id);
 
     /**
+     * @return string
+     */
+    public function getType();
+
+    /**
      * @return array
      */
     public function getData();

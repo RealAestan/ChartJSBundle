@@ -4,6 +4,7 @@ namespace Avegao\ChartjsBundle\Twig;
 
 use Avegao\ChartjsBundle\Chart\ChartInterface;
 use Avegao\ChartjsBundle\Chart\LinearChart;
+use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class ChartJSTwigExtension extends \Twig_Extension
 {
@@ -44,15 +45,14 @@ class ChartJSTwigExtension extends \Twig_Extension
      */
     public function renderJS(ChartInterface $chart)
     {
-        $js  = '$(document).ready(function(){';
-        $js .= 'Chart.defaults.global.responsive = true;';
-        $js .= 'var ctx'.$chart->getId().' = document.getElementById(\''.$chart->getId().'\').getContext(\'2d\');';
+        $js  = 'jQuery(document).ready(function(){';
+        $js .= 'var ctx'.$chart->getId().' = jQuery(\'#'.$chart->getId().'\');';
 
-        $chartClass = get_class($chart);
-
-        if (LinearChart::class === $chartClass) {
-            $js .= 'var '.$chart->getId().' = new Chart(ctx'.$chart->getId().').Line('.json_encode($chart->getData()).', '.json_encode($chart->getOptions()).');';
-        }
+        $js .= 'var chart'.$chart->getId().' = new Chart(ctx'.$chart->getId().', {' .
+                    'type: \''.$chart->getType().'\','.
+                    'data: '.json_encode($chart->getData()).','.
+                    'options: '.json_encode($chart->getOptions()).','.
+                '});';
 
         $js .= '});';
 
