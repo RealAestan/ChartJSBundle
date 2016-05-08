@@ -150,7 +150,7 @@ class LinearChart implements ChartInterface
     public function generateData()
     {
         $data = [
-            'labels' => $this->getLabels(),
+            'labels'   => $this->getLabels(),
             'datasets' => [],
         ];
 
@@ -159,16 +159,9 @@ class LinearChart implements ChartInterface
                 throw new DataSetException('DataSet must be an instance of LinearDataSet, '.get_class($dataSet).' given');
             }
 
-            $data['datasets'][] = [
-                'label'                => $dataSet->getLabel(),
-                'fillColor'            => $dataSet->getFillColor(),
-                'strokeColor'          => $dataSet->getStrokeColor(),
-                'pointColor'           => $dataSet->getPointColor(),
-                'pointStrokeColor'     => $dataSet->getPointStrokeColor(),
-                'pointHighlightFill'   => $dataSet->getPointHighlightFill(),
-                'pointHighlightStroke' => $dataSet->getPointHighlightStroke(),
-                'data'                 => (array) $dataSet->getData(),
-            ];
+            if (!empty($dataSet->getData())) {
+                $data['datasets'][] = $dataSet->toArray();
+            }
         }
 
         $this->setData($data);

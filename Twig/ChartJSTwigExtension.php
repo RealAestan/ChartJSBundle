@@ -48,11 +48,15 @@ class ChartJSTwigExtension extends \Twig_Extension
         $js  = 'jQuery(document).ready(function(){';
         $js .= 'var ctx'.$chart->getId().' = jQuery(\'#'.$chart->getId().'\');';
 
-        $js .= 'var chart'.$chart->getId().' = new Chart(ctx'.$chart->getId().', {' .
-                    'type: \''.$chart->getType().'\','.
-                    'data: '.json_encode($chart->getData()).','.
-                    'options: '.json_encode($chart->getOptions()).','.
-                '});';
+        $js .= 'var chart'.$chart->getId().' = new Chart(ctx'.$chart->getId().', {';
+        $js .= '"type": "'.$chart->getType().'",';
+        $js .= '"data": '.json_encode($chart->getData());
+
+        if (!is_null($chart->getOptions())) {
+            $js .= ',"options": '.json_encode($chart->getOptions()).',';
+        }
+
+        $js .= '});';
 
         $js .= '});';
 
