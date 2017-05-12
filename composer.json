@@ -1,5 +1,5 @@
 {
-    "name": "avegao/chartjs-bundle",
+    "name": "real-aestan/chartjs-bundle",
     "license": "GPL-3.0",
     "type": "symfony-bundle",
     "authors": [
@@ -8,13 +8,18 @@
             "email": "alvarodlvo@gmail.com",
             "homepage": "http://avegao.com",
             "role": "Developer"
+        },
+        {
+            "name": "Anthony Margerand",
+            "email": "anthony.margerand@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.4",
-        "symfony/symfony": "^2.7|^3.0"
+        "symfony/symfony": "^2.7|^3.*"
     },
     "autoload": {
-        "psr-4": { "Avegao\\ChartjsBundle\\": "" }
+        "psr-4": { "RealAestan\\ChartjsBundle\\": "" }
     }
 }
