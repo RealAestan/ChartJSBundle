@@ -5,8 +5,15 @@ namespace Avegao\ChartjsBundle\Chart;
 use Avegao\ChartjsBundle\DataSet\DataSetException;
 use Avegao\ChartjsBundle\DataSet\DataSetInterface;
 use Avegao\ChartjsBundle\DataSet\LinearDataSet;
+use Avegao\ChartjsBundle\DataSet\PieDataSet;
 
-class LinearChart implements ChartInterface
+/**
+ * Class PieChart
+ * @package Avegao\ChartjsBundle\Chart
+ *
+ * @author Anthony Margerand <anthony.margerand@gmail.com>
+ */
+class PieChart implements ChartInterface
 {
     /** @var string */
     private $id;
@@ -54,7 +61,7 @@ class LinearChart implements ChartInterface
      */
     public function getType()
     {
-        return 'line';
+        return 'pie';
     }
 
 
@@ -155,13 +162,14 @@ class LinearChart implements ChartInterface
         ];
 
         foreach ($this->getDataSets() as $dataSet) {
-            if (!$dataSet instanceof LinearDataSet) {
-                throw new DataSetException(
-                    'DataSet must be an instance of LinearDataSet, ' .get_class($dataSet) .' given'
-                );
+            if (!$dataSet instanceof PieDataSet) {
+                throw new DataSetException('DataSet must be an instance of PieDataSet, '.get_class($dataSet).' given');
             }
 
             if (!empty($dataSet->getData())) {
+//                dump($dataSet);
+//                dump($dataSet->toArray());
+//                die();
                 $data['datasets'][] = $dataSet->toArray();
             }
         }

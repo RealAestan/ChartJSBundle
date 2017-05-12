@@ -17,7 +17,7 @@ class LinearDataSet implements DataSetInterface
     private $data;
     
     /**
-     * @var string 	The label for the dataset which appears in the legend and tooltips
+     * @var string The label for the dataset which appears in the legend and tooltips
      */
     private $label;
 
@@ -45,7 +45,7 @@ class LinearDataSet implements DataSetInterface
     /**
      * @var string The fill color under the line
      *
-     * @see http://www.chartjs.org/docs/#colors
+     * @see http://www.chartjs.org/docs/#chart-configuration-colors
      */
     private $backgroundColor;
 
@@ -55,9 +55,9 @@ class LinearDataSet implements DataSetInterface
     private $borderWidth;
 
     /**
-     * @var string The color of the line.
+     * @var string The color of the line
      *
-     * @see http://www.chartjs.org/docs/#colors
+     * @see http://www.chartjs.org/docs/#chart-configuration-colors
      */
     private $borderColor;
 
