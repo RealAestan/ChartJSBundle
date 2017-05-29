@@ -36,7 +36,7 @@ class ChartJSTwigExtension extends \Twig_Extension
      */
     public function renderHTML(ChartInterface $chart, $width = 400, $height = 400)
     {
-        return '<canvas id="'.$chart->getId().'" width="'.$width.'" height="'.$height.'"></canvas>';
+        return '<canvas id="' . $chart->getId() . '" width="' . $width . '" height="' . $height . '"></canvas>';
     }
 
     /**
@@ -45,18 +45,36 @@ class ChartJSTwigExtension extends \Twig_Extension
      */
     public function renderJS(ChartInterface $chart)
     {
-        $js  = 'jQuery(document).ready(function(){';
-        $js .= 'var ctx'.$chart->getId().' = jQuery(\'#'.$chart->getId().'\');';
+        $legendCode = '';
+        $js         = 'jQuery(document).ready(function(){';
+        $js .= 'var ctx' . $chart->getId() . ' = jQuery(\'#' . $chart->getId() . '\');';
 
-        $js .= 'var chart'.$chart->getId().' = new Chart(ctx'.$chart->getId().', {';
-        $js .= '"type": "'.$chart->getType().'",';
-        $js .= '"data": '.json_encode($chart->getData());
+        $js .= 'var chart' . $chart->getId() . ' = new Chart(ctx' . $chart->getId() . ', {';
+        $js .= '"type": "' . $chart->getType() . '",';
+        $js .= '"data": ' . json_encode($chart->getData());
 
         if (!is_null($chart->getOptions())) {
-            $js .= ',"options": '.json_encode($chart->getOptions()).',';
+            $legendFunction = '';
+            $options        = $chart->getOptions();
+
+            if (key_exists('legendCallback', $chart->getOptions())) {
+                $legendFunction = 'legendCallback: function(chart) {';
+                $legendFunction .= $options['legendCallback'];
+                $legendFunction .= '}';
+                $legendCode = 'jQuery(".chart-legend-' . $chart->getId() . '").html(chart' . $chart->getId() . '.generateLegend());';
+                unset($options['legendCallback']);
+                $chart->setOptions($options);
+            }
+
+            $jsonedOptions = json_encode($chart->getOptions());
+            $jsonedOptions = substr($jsonedOptions, 0, -1) . ',';
+
+            $js .= ',"options":' . $jsonedOptions . $legendFunction . '}';
         }
 
         $js .= '});';
+
+        $js .= $legendCode;
 
         $js .= '});';
 
