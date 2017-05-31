@@ -21,7 +21,7 @@ class PieChart implements ChartInterface
     /** @var array */
     private $labels;
 
-    /** @var LinearDataSet[] */
+    /** @var PieDataSet[] */
     private $dataSets;
 
     /** @var array */
@@ -167,9 +167,6 @@ class PieChart implements ChartInterface
             }
 
             if (!empty($dataSet->getData())) {
-//                dump($dataSet);
-//                dump($dataSet->toArray());
-//                die();
                 $data['datasets'][] = $dataSet->toArray();
             }
         }
