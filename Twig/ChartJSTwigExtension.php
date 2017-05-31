@@ -3,8 +3,6 @@
 namespace Avegao\ChartjsBundle\Twig;
 
 use Avegao\ChartjsBundle\Chart\ChartInterface;
-use Avegao\ChartjsBundle\Chart\LinearChart;
-use Symfony\Bundle\TwigBundle\TwigEngine;
 
 class ChartJSTwigExtension extends \Twig_Extension
 {
@@ -30,8 +28,8 @@ class ChartJSTwigExtension extends \Twig_Extension
 
     /**
      * @param ChartInterface $chart
-     * @param int $width
-     * @param int $height
+     * @param int  $width
+     * @param int  $height
      * @return string
      */
     public function renderHTML(ChartInterface $chart, $width = 400, $height = 400)
@@ -48,7 +46,6 @@ class ChartJSTwigExtension extends \Twig_Extension
         $legendCode = '';
         $js         = 'jQuery(document).ready(function(){';
         $js .= 'var ctx' . $chart->getId() . ' = jQuery(\'#' . $chart->getId() . '\');';
-
         $js .= 'var chart' . $chart->getId() . ' = new Chart(ctx' . $chart->getId() . ', {';
         $js .= '"type": "' . $chart->getType() . '",';
         $js .= '"data": ' . json_encode($chart->getData());
